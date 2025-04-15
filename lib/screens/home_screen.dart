@@ -6,8 +6,6 @@ import 'package:cineclima/screens/widgets/carrossel_filmes.dart';
 import 'package:cineclima/screens/pesquisa_screen.dart';
 import 'package:cineclima/screens/salvos_screen.dart';
 import 'package:cineclima/screens/perfil_screen.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -23,36 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final ClimaService climaService = ClimaService();
   final FilmesService filmesService = FilmesService();
-
-  // Função de permissão de localização
-  Future<void> pedirPermissaoLocalizacao(BuildContext context) async{
-    // Verifica o status da permissão de localização
-    var status= await Permission.location.status;
-    // Se a permissão for negada, vai solicitar ao usuário
-    if(status.isDenied || status.isRestricted){
-      status= await Permission.location.request();
-    }
-    // Se a permissão for concedida, vai obter a posição atual
-    if(status.isGranted){
-      Position pos= await Geolocator.getCurrentPosition();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content:Text("Localização:${pos.latitude}, ${pos.longitude}")),
-      );
-    }else{
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Permissão de localização negada.")),
-      );
-    }
-  }
-  // Função para atualizar os dados (clima e filmes)
+  
   Future<void> atualizarDados() async {
-    try {
-      Position pos= await Geolocator.getCurrentPosition();
-      
-      var climaData= await ClimaService.getClimaPorCoordenadas(
-        pos.latitude,
-        pos.longitude,
-      );
+    try {     
+      var climaData= await ClimaService.getClima("São José dos Campos");
       setState(() {
         clima = climaData['descricao'];
         temperatura = "${climaData['temperatura']} °C";
