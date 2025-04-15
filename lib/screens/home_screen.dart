@@ -127,17 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Image.asset('imagens/logo.png', height: 90),
                 centerTitle: true,
               ),
-              SizedBox(height: 16),
-              // Botão de permitir localização
-              ElevatedButton(onPressed:()=> pedirPermissaoLocalizacao(context), 
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueGrey,
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30),
-                ),
-                elevation: 5,
-                shadowColor: Colors.blueGrey,
-              ),
+              SizedBox(height: 16)
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
