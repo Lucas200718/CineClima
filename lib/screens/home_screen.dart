@@ -4,8 +4,6 @@ import 'package:cineclima/screens/services/filmes_service.dart';
 import 'package:cineclima/screens/widgets/clima_widget.dart';
 import 'package:cineclima/screens/widgets/carrossel_filmes.dart';
 import 'package:cineclima/screens/pesquisa_screen.dart';
-import 'package:cineclima/screens/salvos_screen.dart';
-import 'package:cineclima/screens/perfil_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -24,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   
   Future<void> atualizarDados() async {
     try {     
-      var climaData= await ClimaService.getClima("São José dos Campos");
+      var climaData= await climaService.getClima("São José dos Campos");
       setState(() {
         clima = climaData['descricao'];
         temperatura = "${climaData['temperatura']} °C";
