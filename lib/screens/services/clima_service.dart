@@ -5,8 +5,8 @@ class ClimaService {
   final String apiKey = 'b03ff2bee248c15f1338edd7e505ba82'; 
   final String baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
-  Future<Map<String, dynamic>> getClimaPorCoordenadas(double lat, double lon) async {
-    final url = Uri.parse('https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=b03ff2bee248c15f1338edd7e505ba82&units=metric&lang=pt_br');
+  Future<Map<String, dynamic>> getClima(String cidade) async {
+    final url = Uri.parse('$baseUrl?q=$cidade&appid=$apiKey&units=metric&lang=pt_br');
     final response = await http.get(url);
     
 
